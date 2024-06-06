@@ -8,6 +8,7 @@ void writeFile ();
 
 int main()
 {
+    //cout << "hello world";
     int option;
     while(1)
     {
