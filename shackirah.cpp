@@ -3,8 +3,8 @@
 
 using namespace std;
 string createFile ();
-void readFile ();
-void writeFile ();
+string readFile ();
+string writeFile ();
 
 
 int main()
@@ -13,22 +13,25 @@ int main()
    // while(1)
     //{
        
-        cout <<"Choose option\n" <<"1. Write to a file\n" <<"2. Read from a file\n"
-             <<"3. Create a file\n" <<"4. Exit"<<endl;
-        cin  >>option;
+        cout <<"Choose option\n" 
+             <<"1. Write to a file\n" 
+             <<"2. Read from a file\n"
+             <<"3. Create a file\n" 
+             <<"4. Exit"<<endl;
+        cin >>option;
         switch (option)
         {
-         case 1:
-             //writeFile();
+        case 1:
+             writeFile();
              break;
         case 2:
-             //readFile();
+             readFile();
              break;
         case 3:
              createFile();
              break;
-        //case 4:
-            // break;
+        case 4:
+            break;
         default:
             cout <<"Oooops!!!!!!!!!! invalid input"<<endl;
         }
@@ -47,10 +50,28 @@ string createFile ()
     ofstream myFile(fileName);
     return fileName;
 }
-void readFile ()
+string readFile ()
 {
+    string fileName;
+    ifstream myFile("text.txt");
+    myFile >> fileName;
+    cout << fileName;
+    return fileName;
 } 
-void writeFile ()
+string writeFile ()
 {
-    ofstream myFile("I love my mom");
+    string sentence;
+    cout << "Enter what to write to the file:" << endl;
+    //cin.ignore():clear the newline character left in the buffer by previous cin.
+    cin.ignore();
+    getline(cin, sentence);
+    ofstream myFile("text.txt");
+    if (myFile.is_open()) {
+        myFile << sentence;
+        myFile.close();
+        cout << "Content written to file successfully." << endl;
+    } else {
+        cerr << "Error opening file for writing." << endl;
+    }
+    return sentence;
 }
