@@ -10,9 +10,6 @@ string writeFile ();
 int main()
 {
     int option;
-   // while(1)
-    //{
-       
         cout <<"Choose option\n" 
              <<"1. Write to a file\n" 
              <<"2. Read from a file\n"
@@ -35,10 +32,6 @@ int main()
         default:
             cout <<"Oooops!!!!!!!!!! invalid input"<<endl;
         }
-   // }
-    
-
-//return 0;
 }
 string createFile ()
 {
@@ -52,10 +45,19 @@ string createFile ()
 }
 string readFile ()
 {
-    string fileName;
+     string fileName;
     ifstream myFile("text.txt");
-    myFile >> fileName;
-    cout << fileName;
+    if (myFile.is_open()) {
+        string content;
+        while (getline(myFile, content)) {
+            fileName += content + "\n";
+        }
+        myFile.close();
+        cout << "Content read from file:" << endl;
+        cout << fileName;
+    } else {
+        cerr << "Error opening file for reading." << endl;
+    }
     return fileName;
 } 
 string writeFile ()
